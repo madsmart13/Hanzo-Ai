@@ -9,10 +9,10 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
-const OPENAI_KEY = process.env.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;
+const OPENAI_KEY = process.env.OPENAI_API_KEY;
 
 if (!OPENAI_KEY) {
-    console.error("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");
+    console.error("❌ لطفا در فایل .env کلید OPENAI_API_KEY را قرار بدهید!");
     process.exit(1);
 }
 
@@ -25,7 +25,7 @@ app.post("/api/hanzo", async (req, res) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${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}`
+                "Authorization": `Bearer ${OPENAI_KEY}`
             },
             body: JSON.stringify({
                 model: "gpt-4.1-mini",
@@ -34,7 +34,6 @@ app.post("/api/hanzo", async (req, res) => {
             })
         });
 
-        // Streaming
         res.setHeader("Content-Type", "text/event-stream");
         res.setHeader("Cache-Control", "no-cache");
 
